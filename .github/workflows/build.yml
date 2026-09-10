@@ -8,10 +8,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Download project
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.14"
@@ -26,14 +26,14 @@ jobs:
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name "Ping Monitor" --icon "PingMonitor.ico" --add-data "PingMonitor.ico;." main.py
 
-- name: Prepare portable release
-  run: |
-    New-Item -ItemType Directory -Force -Path release
-    Copy-Item "dist\Ping Monitor.exe" "release\Ping Monitor.exe" -Force
-    Copy-Item "PingMonitor.ico" "release\PingMonitor.ico" -Force
+      - name: Prepare portable release
+        run: |
+          New-Item -ItemType Directory -Force -Path artifact
+          Copy-Item "dist\Ping Monitor.exe" "artifact\Ping Monitor.exe" -Force
+          Copy-Item "PingMonitor.ico" "artifact\PingMonitor.ico" -Force
 
       - name: Upload portable build
         uses: actions/upload-artifact@v4
         with:
           name: PingMonitor-Windows
-          path: release/
+          path: artifact/
