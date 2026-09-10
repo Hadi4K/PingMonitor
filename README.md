@@ -75,13 +75,7 @@ Ping Monitor.exe
 
 ## Screenshots
 
-Add application screenshots here.
-
-Example:
-
-```markdown
 ![Ping Monitor](screenshots/main.png)
-```
 
 ## Building
 
