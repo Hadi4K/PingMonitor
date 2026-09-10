@@ -26,11 +26,11 @@ jobs:
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name "Ping Monitor" --icon "PingMonitor.ico" --add-data "PingMonitor.ico;." main.py
 
-      - name: Prepare portable release
-        run: |
-          mkdir release
-          copy "dist\Ping Monitor.exe" "release\Ping Monitor.exe"
-          copy "PingMonitor.ico" "release\PingMonitor.ico"
+- name: Prepare portable release
+  run: |
+    New-Item -ItemType Directory -Force -Path release
+    Copy-Item "dist\Ping Monitor.exe" "release\Ping Monitor.exe" -Force
+    Copy-Item "PingMonitor.ico" "release\PingMonitor.ico" -Force
 
       - name: Upload portable build
         uses: actions/upload-artifact@v4
